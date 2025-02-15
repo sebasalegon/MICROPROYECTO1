@@ -1,11 +1,20 @@
+/**
+ * Juego de Simon Dice
+ */
 let secuencia = [];
 let secuenciaJugador = [];
 let puntaje = 0;
 let nombreUsuario = localStorage.getItem('nombreUsuario');
 let jugando = false; 
-
+/**
+ * Función que se ejecuta al cargar la página
+ */
 function guardarNombre() {
     const usuario = document.getElementById('usuario').value;
+    if(usuario.trim() === '') {
+        alert('Por favor ingrese un nombre de usuario');
+        return;
+    }
     localStorage.setItem('nombreUsuario', usuario);
     window.location.href = 'Menu_registrado.html';
 }
@@ -20,23 +29,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
     if (usuario) {
         const mensajeSaludo = `Hola ${usuario}, ¿Quieres empezar?`;
         document.getElementById('mensajeSaludo').innerText = mensajeSaludo;
-    } else {
-        document.getElementById('mensajeSaludo').innerText = 'Hola, ¿cómo estás?';
+    } 
+    const btnPuntaje = document.getElementById('btnPuntaje');
+    if (btnPuntaje) {
+        btnPuntaje.addEventListener('click', function() {
+            mostrarPuntajes();
+            document.getElementById('tablaPuntajes').style.display = 'block';
+        });
     }
-
-    document.getElementById('btnPuntaje').addEventListener('click', function() {
-        window.location.href = 'Puntajes.html';
-    });
-});
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    const puntajes = JSON.parse(localStorage.getItem('puntajes')) || [];
     const listaPuntajes = document.getElementById('listaPuntajes');
-    puntajes.forEach((puntaje, index) => {
-        const li = document.createElement('li');
-        li.innerText = `${index + 1}. ${puntaje.nombre} - ${puntaje.puntos} puntos`;
-        listaPuntajes.appendChild(li);
-    });
+    if (listaPuntajes) {
+        const puntajes = JSON.parse(localStorage.getItem('puntajes')) || [];
+        puntajes.forEach((puntaje, index) => {
+            const li = document.createElement('li');
+            li.innerText = `${index + 1}. ${puntaje.nombre} - ${puntaje.puntos} puntos`;
+            listaPuntajes.appendChild(li);
+        });
+    }
 });
 
 function iniciarJuego() {
@@ -123,4 +132,15 @@ function agregarPuntaje(nombre, puntos) {
     const puntajes = JSON.parse(localStorage.getItem('puntajes')) || [];
     puntajes.push({ nombre, puntos });
     localStorage.setItem('puntajes', JSON.stringify(puntajes));
+}
+function mostrarPuntajes() {
+    const puntajes = JSON.parse(localStorage.getItem('puntajes')) || [];
+    puntajes.sort((a, b) => b.puntos - a.puntos);
+    const listaPuntajes = document.getElementById('listaPuntajes');
+    listaPuntajes.innerHTML = '';
+    puntajes.forEach((puntaje, index) => {
+        const li = document.createElement('li');
+        li.innerText = `${index + 1}. ${puntaje.nombre} - ${puntaje.puntos} puntos`;
+        listaPuntajes.appendChild(li);
+    });
 }

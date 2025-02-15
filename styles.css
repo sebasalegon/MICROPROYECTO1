@@ -1,19 +1,57 @@
-/*Para Menu_inicial*/
+/*Estilos generales*/
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(142, 128, 235);
+    text-align: center;
+}
 
+h1, h2, h3, h4, h6{
+    margin: 10px;
+}
+.Ingresar_nombre, .Nombre_registrado{
+    margin: 20px auto;
+    padding: 10px;
+    background-color: rgb(210, 98, 254);
+    border-radius: 10px;
+    width: 300px;
+    border: 5px solid rgb(67, 26, 110);
+}
+
+input{
+    display: block;
+    text-align: center;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+a, button, b{
+    display: block;
+    width: 200px;
+    margin: 10px auto;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: rgb(132, 28, 28);
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    cursor: pointer;
+}
+/*Estilos especificos para Menu_incial*/
     h1{
         display: block;
         border-radius: 10px;
         font-weight: 100;
+        width: 300px;
+        margin: 0px auto;
         font-size: 30px;
         text-align: center;
-        text-align: center;
         font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(238, 189, 75);
+        border: 5px solid rgb(174, 147, 12);
     }
     h2{
         text-align: center;
         font-family: Arial, Helvetica, sans-serif;
-        text-align: center;
-        
     }
     h3{
         text-align: center;
@@ -29,11 +67,57 @@
         text-align: center;
         margin: 100px auto;
         padding: 10px;
-
+}
+button{
+    margin: 100px auto;
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+    background-color: rgb(238, 189, 75);
+    font-size: 20px;
+}
+    a{
+        display: block;
+        width: 30px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        border-radius: 10px;
+        margin:  auto ;
+        padding: 15px 30px;
+        background-color: rgb(137, 7, 7);
+        color: aliceblue;
+        text-decoration: none ;
     }
 
 
-    a{
+/*Estilos especificos para Menu_Registrado*/
+    h5{
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 800;
+        font-size: 30px;
+    }
+
+    div{
+        display: block;
+        text-align: center;
+        margin: 20px auto;
+        padding: 10px;
+        background-color: pink;
+        border-radius: 10px;
+        width: 300px;
+        font-family: Arial, Helvetica, sans-serif;
+        
+    }
+
+    button{
+        margin: 100px auto;
+        font-family: Arial, Helvetica, sans-serif;
+        display: block;
+        background-color: rgb(238, 189, 75);
+        font-size: 20px;
+        }
+
+    b{
         display: block;
         width: 67px;
         font-family: Arial, Helvetica, sans-serif;
@@ -45,107 +129,25 @@
         color: aliceblue;
         text-decoration: none ;
     }
-
-    html{
-        background-color: rgb(85, 169, 222);
+    p{
+        font-size: 18px;
     }
-    
-/*Para Menu_registrado*/
-h5{
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 800;
-    font-size: 30px;
-}
-div{
-    display: block;
-    text-align: center;
-    margin: 20px auto;
-    padding: 10px;
-    background-color: pink;
-    border-radius: 10px;
-    width: 300px;
-    font-family: Arial, Helvetica, sans-serif;
-    
-}
 
-button{
-    margin: 100px auto;
-    font-family: Arial, Helvetica, sans-serif;
-    display: block;
-    padding: 5px;
-    border-radius: 10px;
-    width: 400px;
-    background-color: cornsilk;
+/*Estilos especificos para Puntajes*/
+    h6{
+        display: block;
+        margin: auto;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        padding: 15px 30px;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        width: 300px;
+        font-size: 30px;
+    }
 
-}
-
-b{
-    display: block;
-    width: 67px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
-    border-radius: 10px;
-    margin:  auto ;
-    padding: 15px 30px;
-    background-color: red;
-    color: aliceblue;
-    text-decoration: none ;
-}
-
-/*Para Puntajes*/
-h6{
-    display: block;
-    margin: auto;
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    padding: 15px 30px;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    width: 300px;
-    font-size: 30px;
-}
-
-/*Para Juego*/
-
-/* Estilos generales */
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(85, 169, 222);
-    text-align: center;
-}
-
-h1, h2, h3, h4, h6 {
-    margin: 10px;
-}
-
-.Ingresar_nombre, .Nombre_registrado {
-    margin: 20px auto;
-    padding: 10px;
-    background-color: pink;
-    border-radius: 10px;
-    width: 300px;
-}
-
-input {
-    display: block;
-    text-align: center;
-    margin: 10px auto;
-    padding: 10px;
-}
-
-a, button, b {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 20px;
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.boton {
+/*Estilos especificos para Juego*/
+.boton{
     width: 100px;
     height: 100px;
     margin: 10px;
@@ -153,11 +155,10 @@ a, button, b {
     border-radius: 10px;
     transition: transform 0.2s;
 }
-
-#rojo { background-color: red; }
-#verde { background-color: green; }
-#azul { background-color: blue; }
-#amarillo { background-color: rgb(255, 255, 2); }
+#rojo{background-color: red;}
+#verde{background-color: green;}
+#azul{background-color: blue;}
+#amarillo{background-color: rgb(255, 255, 2);}
 
 .iluminar {
     transform: scale(1.1);
