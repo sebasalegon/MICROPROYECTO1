@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 
-/*Para el Simon Says*/ 
+/*Para el Simon Says**/ 
 function agregarPuntaje(nombre, puntos) {
     const puntajes = JSON.parse(localStorage.getItem('puntajes')) || [];
     puntajes.push({ nombre, puntos });
