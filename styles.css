@@ -31,13 +31,6 @@
         padding: 10px;
 
     }
-<<<<<<< HEAD
-    html{
-        background-color: rgb(111, 190, 242);
-    }
-=======
->>>>>>> 62f1c5fd183ff723c5c4cc4006eed51794beb3a4
-
 
 
     a{
@@ -51,6 +44,10 @@
         background-color: red;
         color: aliceblue;
         text-decoration: none ;
+    }
+
+    html{
+        background-color: rgb(85, 169, 222);
     }
     
 /*Para Menu_registrado*/
