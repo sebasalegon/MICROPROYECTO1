@@ -5,7 +5,8 @@ let secuencia = [];
 let secuenciaJugador = [];
 let puntaje = 0;
 let nombreUsuario = localStorage.getItem('nombreUsuario');
-let jugando = false; 
+let jugando = false;
+
 /**
  * Función que se ejecuta al cargar la página
  */
@@ -24,28 +25,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     if (usuario_field) {
         usuario_field.value = "";
     }
-    
+
     const usuario = localStorage.getItem('nombreUsuario');
     if (usuario) {
         const mensajeSaludo = `Hola ${usuario}, ¿Quieres empezar?`;
         document.getElementById('mensajeSaludo').innerText = mensajeSaludo;
-    } 
-    const btnPuntaje = document.getElementById('btnPuntaje');
-    if (btnPuntaje) {
-        btnPuntaje.addEventListener('click', function() {
-            mostrarPuntajes();
-            document.getElementById('tablaPuntajes').style.display = 'block';
-        });
     }
-    const listaPuntajes = document.getElementById('listaPuntajes');
-    if (listaPuntajes) {
-        const puntajes = JSON.parse(localStorage.getItem('puntajes')) || [];
-        puntajes.forEach((puntaje, index) => {
-            const li = document.createElement('li');
-            li.innerText = `${index + 1}. ${puntaje.nombre} - ${puntaje.puntos} puntos`;
-            listaPuntajes.appendChild(li);
-        });
-    }
+
+    mostrarPuntajeActual();
 });
 
 function iniciarJuego() {
@@ -53,7 +40,7 @@ function iniciarJuego() {
     secuenciaJugador = [];
     puntaje = 0;
     document.getElementById('puntaje').innerText = `Puntaje: ${puntaje}`;
-    document.getElementById('resultado').style.display = 'none'; 
+    document.getElementById('resultado').style.display = 'none';
     siguienteRonda();
 }
 
@@ -67,7 +54,7 @@ function siguienteRonda() {
 }
 
 function generarColorAleatorio() {
-    const colores= ['rojo', 'verde', 'azul', 'amarillo'];
+    const colores = ['rojo', 'verde', 'azul', 'amarillo'];
     return colores[Math.floor(Math.random() * colores.length)];
 }
 
@@ -94,7 +81,7 @@ function iluminarBoton(color) {
 }
 
 function jugadorSelecciona(color) {
-    if (jugando) return; 
+    if (jugando) return;
     secuenciaJugador.push(color);
     iluminarBoton(color);
     verificarSecuencia();
@@ -107,7 +94,7 @@ function verificarSecuencia() {
     if (secuenciaJugador[longitudJugador - 1] !== secuencia[longitudJugador - 1]) {
         mostrarResultado(false);
         agregarPuntaje(nombreUsuario, puntaje);
-        jugando = false; 
+        jugando = false;
     } else if (longitudJugador === longitudSecuencia) {
         setTimeout(siguienteRonda, 1000);
     }
@@ -130,17 +117,33 @@ function reiniciarJuego() {
 
 function agregarPuntaje(nombre, puntos) {
     const puntajes = JSON.parse(localStorage.getItem('puntajes')) || [];
-    puntajes.push({ nombre, puntos });
+    const indiceExistente = puntajes.findIndex(p => p.nombre === nombre);
+    if (indiceExistente !== -1) {
+        puntajes[indiceExistente].puntos = puntos;
+    } else {
+        puntajes.push({ nombre, puntos });
+    }
     localStorage.setItem('puntajes', JSON.stringify(puntajes));
+    mostrarPuntajeActual();
 }
-function mostrarPuntajes() {
+
+function mostrarPuntajeActual() {
+    const usuario = localStorage.getItem('nombreUsuario');
     const puntajes = JSON.parse(localStorage.getItem('puntajes')) || [];
-    puntajes.sort((a, b) => b.puntos - a.puntos);
     const listaPuntajes = document.getElementById('listaPuntajes');
-    listaPuntajes.innerHTML = '';
-    puntajes.forEach((puntaje, index) => {
-        const li = document.createElement('li');
-        li.innerText = `${index + 1}. ${puntaje.nombre} - ${puntaje.puntos} puntos`;
-        listaPuntajes.appendChild(li);
-    });
+    if (listaPuntajes) {
+        listaPuntajes.innerHTML = ''; // Limpiar lista existente
+        const puntajeUsuario = puntajes.filter(p => p.nombre === usuario);
+        puntajeUsuario.forEach((puntaje, index) => {
+            const li = document.createElement('li');
+            li.innerText = `${index + 1}. ${puntaje.nombre} - ${puntaje.puntos} puntos`;
+            listaPuntajes.appendChild(li);
+        });
+    }
 }
+
+document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'hidden') {
+        agregarPuntaje(nombreUsuario, puntaje);
+    }
+});

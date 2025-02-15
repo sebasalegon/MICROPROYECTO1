@@ -130,7 +130,7 @@ button{
         text-decoration: none ;
     }
     p{
-        font-size: 18px;
+        font-size: 20px;
     }
 
 /*Estilos especificos para Puntajes*/
@@ -147,6 +147,7 @@ button{
     }
 
 /*Estilos especificos para Juego*/
+
 .boton{
     width: 100px;
     height: 100px;

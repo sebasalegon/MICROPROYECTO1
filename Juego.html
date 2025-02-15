@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego Simon Says</title>
     <link rel="stylesheet" href="styles.css">
-  
 </head>
 <body>
+    <button onclick="window.location.href='Menu_registrado.html'" style="position: absolute; top: 10px; left: 10px; font-size: small; width: 67px;">Salir</button>
+
     <h1>SIMON SAYS</h1>
     <button id="botonInicio" onclick="iniciarJuego()">Iniciar Juego</button>
     <div class="botones">
@@ -16,6 +17,7 @@
         <div class="boton" id="azul" onclick="jugadorSelecciona('azul')"></div>
         <div class="boton" id="amarillo" onclick="jugadorSelecciona('amarillo')"></div>
     </div>
+
     <h2 id="puntaje">Puntaje: 0</h2>
     <h3 id="ronda">Ronda: 0</h3>
     <div id="resultado" style="display: none;">
