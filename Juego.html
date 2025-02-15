@@ -3,15 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu_juego</title>
+    <title>Juego Simon Says</title>
     <link rel="stylesheet" href="styles.css">
-
+  
 </head>
-
-<h1>SIMON SAYS</h1>
-    <h2>IniciarRonda</h2>
-
 <body>
+    <h1>SIMON SAYS</h1>
+    
+    <button id="botonInicio" onclick="iniciarJuego()">Iniciar Juego</button>
+    <div class="botones">
+        <div class="boton" id="rojo" onclick="jugadorSelecciona('rojo')"></div>
+        <div class="boton" id="verde" onclick="jugadorSelecciona('verde')"></div>
+        <div class="boton" id="azul" onclick="jugadorSelecciona('azul')"></div>
+        <div class="boton" id="amarillo" onclick="jugadorSelecciona('amarillo')"></div>
+    </div>
+    <h2 id="puntaje">Puntaje: 0</h2>
+    <div id="resultado" style="display: none;">
+        <h3 id="mensajeResultado"></h3>
+        <button onclick="reiniciarJuego()">Volver a Jugar</button>
+        <button onclick="window.location.href='Menu_registrado.html'">Volver al Menú</button>
+    <script src="script.js"></script>
     
 </body>
 </html>
