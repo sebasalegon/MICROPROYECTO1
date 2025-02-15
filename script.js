@@ -53,7 +53,7 @@ function iniciarJuego() {
     secuenciaJugador = [];
     puntaje = 0;
     document.getElementById('puntaje').innerText = `Puntaje: ${puntaje}`;
-    document.getElementById('resultado').style.display = 'none'; // Ocultar resultado
+    document.getElementById('resultado').style.display = 'none'; 
     siguienteRonda();
 }
 
@@ -90,11 +90,6 @@ function iluminarBoton(color) {
     setTimeout(() => {
         boton.classList.remove('iluminar');
     }, 500);
-}
-
-function reproducirSonido(color) {
-    const sonido = new Audio(`sonidos/${color}.mp3`); // Asegúrate de que los archivos de sonido estén en la carpeta "sonidos"
-    sonido.play();
 }
 
 function jugadorSelecciona(color) {
