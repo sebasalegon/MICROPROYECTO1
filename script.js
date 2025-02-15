@@ -93,7 +93,7 @@ function verificarSecuencia() {
 
     if (secuenciaJugador[longitudJugador - 1] !== secuencia[longitudJugador - 1]) {
         mostrarResultado(false);
-        agregarPuntaje(nombreUsuario, puntaje);
+        agregarPuntaje(nombreUsuario, puntaje, secuencia.length);
         jugando = false;
     } else if (longitudJugador === longitudSecuencia) {
         setTimeout(siguienteRonda, 1000);
@@ -115,13 +115,14 @@ function reiniciarJuego() {
     iniciarJuego();
 }
 
-function agregarPuntaje(nombre, puntos) {
+function agregarPuntaje(nombre, puntos, ronda) {
     const puntajes = JSON.parse(localStorage.getItem('puntajes')) || [];
     const indiceExistente = puntajes.findIndex(p => p.nombre === nombre);
     if (indiceExistente !== -1) {
         puntajes[indiceExistente].puntos = puntos;
+        puntajes[indiceExistente].ronda = ronda;
     } else {
-        puntajes.push({ nombre, puntos });
+        puntajes.push({ nombre, puntos, ronda });
     }
     localStorage.setItem('puntajes', JSON.stringify(puntajes));
     mostrarPuntajeActual();
@@ -136,7 +137,7 @@ function mostrarPuntajeActual() {
         const puntajeUsuario = puntajes.filter(p => p.nombre === usuario);
         puntajeUsuario.forEach((puntaje, index) => {
             const li = document.createElement('li');
-            li.innerText = `${index + 1}. ${puntaje.nombre} - ${puntaje.puntos} puntos`;
+            li.innerText = `${index + 1}. ${puntaje.nombre} - ${puntaje.puntos} puntos - Ronda ${puntaje.ronda}`;
             listaPuntajes.appendChild(li);
         });
     }
@@ -144,6 +145,6 @@ function mostrarPuntajeActual() {
 
 document.addEventListener('visibilitychange', function() {
     if (document.visibilityState === 'hidden') {
-        agregarPuntaje(nombreUsuario, puntaje);
+        agregarPuntaje(nombreUsuario, puntaje, secuencia.length);
     }
 });
