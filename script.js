@@ -10,6 +10,7 @@ let ronda = 0;  // Añadimos una variable global para la ronda
 
 /**
  * Función que se ejecuta al cargar la página
+ * Guarda el nombre del usuario y reinicia los puntajes
  */
 function guardarNombre() {
     const usuario = document.getElementById('usuario').value;
@@ -35,6 +36,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 });
 
+/**
+ * Inicia el juego y establece las variables iniciales
+ */
 function iniciarJuego() {
     secuencia = [];
     secuenciaJugador = [];
@@ -46,6 +50,9 @@ function iniciarJuego() {
     siguienteRonda();
 }
 
+/**
+ * Avanza a la siguiente ronda, genera un nuevo color y reproduce la secuencia
+ */
 function siguienteRonda() {
     secuenciaJugador = [];
     puntaje++;
@@ -57,11 +64,17 @@ function siguienteRonda() {
     reproducirSecuencia();
 }
 
+/**
+ * Genera un color aleatorio entre rojo, verde, azul y amarillo
+ */
 function generarColorAleatorio() {
     const colores = ['rojo', 'verde', 'azul', 'amarillo'];
     return colores[Math.floor(Math.random() * colores.length)];
 }
 
+/**
+ * Reproduce la secuencia de colores almacenada en la variable 'secuencia'
+ */
 function reproducirSecuencia() {
     jugando = true; // Inicia el juego
     let i = 0;
@@ -76,6 +89,9 @@ function reproducirSecuencia() {
     }, 1000);
 }
 
+/**
+ * Ilumina el botón del color correspondiente y reproduce el sonido asociado
+ */
 function iluminarBoton(color) {
     const boton = document.getElementById(color);
     boton.classList.add('iluminar');
@@ -86,6 +102,9 @@ function iluminarBoton(color) {
     sonidos[color].play();
 }
 
+/**
+ * Maneja la selección del color por parte del jugador y verifica la secuencia
+ */
 function jugadorSelecciona(color) {
     if (jugando) return;
     secuenciaJugador.push(color);
@@ -95,6 +114,9 @@ function jugadorSelecciona(color) {
     sonidos[color].play();
 }
 
+/**
+ * Verifica si la secuencia ingresada por el jugador es correcta
+ */
 function verificarSecuencia() {
     const longitudSecuencia = secuencia.length;
     const longitudJugador = secuenciaJugador.length;
@@ -108,6 +130,9 @@ function verificarSecuencia() {
     }
 }
 
+/**
+ * Muestra el resultado del juego (ganaste o perdiste)
+ */
 function mostrarResultado(gano) {
     const resultadoDiv = document.getElementById('resultado');
     const mensaje = document.getElementById('mensajeResultado');
@@ -119,10 +144,16 @@ function mostrarResultado(gano) {
     resultadoDiv.style.display = 'block';
 }
 
+/**
+ * Reinicia el juego
+ */
 function reiniciarJuego() {
     iniciarJuego();
 }
 
+/**
+ * Agrega el puntaje del jugador al localStorage
+ */
 function agregarPuntaje(nombre, puntos, rondaActual) {
     const puntajes = JSON.parse(localStorage.getItem('puntajes')) || [];
     const indiceExistente = puntajes.findIndex(p => p.nombre === nombre);
@@ -135,6 +166,9 @@ function agregarPuntaje(nombre, puntos, rondaActual) {
     localStorage.setItem('puntajes', JSON.stringify(puntajes));
 }
 
+/**
+ * Muestra los puntajes almacenados en la lista de puntajes
+ */
 function mostrarPuntajes() {
     const puntajes = JSON.parse(localStorage.getItem('puntajes')) || [];
     console.log(puntajes);
@@ -149,7 +183,9 @@ function mostrarPuntajes() {
     }
 }
 
-// Nueva función para reiniciar puntajes
+/**
+ * Reinicia los puntajes almacenados en el localStorage
+ */
 function reiniciarPuntajes() {
     localStorage.removeItem('puntajes');
 }
