@@ -84,6 +84,9 @@ function iluminarBoton(color) {
     setTimeout(() => {
         boton.classList.remove('iluminar');
     }, 500);
+    sonidos[color].currentTime = 0;
+    sonidos[color].play();
+
 }
 
 function jugadorSelecciona(color) {
@@ -91,6 +94,8 @@ function jugadorSelecciona(color) {
     secuenciaJugador.push(color);
     iluminarBoton(color);
     verificarSecuencia();
+    sonidos[color].currentTime = 0; 
+    sonidos[color].play();
 }
 
 function verificarSecuencia() {
@@ -161,3 +166,10 @@ document.addEventListener('visibilitychange', function() {
         agregarPuntaje(nombreUsuario, puntaje, ronda);  // Aseguramos pasar la ronda correcta
     }
 });
+
+const sonidos = {
+    rojo: new Audio('rojo.mp3.mp3'),
+    verde: new Audio('verde.mp3.mp3'),
+    azul: new Audio('azul.mp3.mp3'),
+    amarillo: new Audio('amarillo,mp3.mp3')
+};
