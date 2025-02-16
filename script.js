@@ -203,8 +203,8 @@ document.addEventListener('visibilitychange', function() {
 });
 
 const sonidos = {
-    rojo: new Audio('rojo.mp3'),
-    verde: new Audio('verde.mp3'),
-    azul: new Audio('azul.mp3'),
-    amarillo: new Audio('amarillo.mp3')
+    rojo: new Audio('rojo.mp3.mp3'),
+    verde: new Audio('verde.mp3.mp3'),
+    azul: new Audio('azul.mp3.mp3'),
+    amarillo: new Audio('amarillo,mp3.mp3')
 };
