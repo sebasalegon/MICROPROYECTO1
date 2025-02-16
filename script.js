@@ -33,8 +33,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const mensajeSaludo = `Hola ${usuario}, ¿Quieres empezar?`;
         document.getElementById('mensajeSaludo').innerText = mensajeSaludo;
     }
-
-    mostrarPuntajes();
 });
 
 function iniciarJuego() {
@@ -86,7 +84,6 @@ function iluminarBoton(color) {
     }, 500);
     sonidos[color].currentTime = 0;
     sonidos[color].play();
-
 }
 
 function jugadorSelecciona(color) {
@@ -94,7 +91,7 @@ function jugadorSelecciona(color) {
     secuenciaJugador.push(color);
     iluminarBoton(color);
     verificarSecuencia();
-    sonidos[color].currentTime = 0; 
+    sonidos[color].currentTime = 0;
     sonidos[color].play();
 }
 
@@ -103,8 +100,8 @@ function verificarSecuencia() {
     const longitudJugador = secuenciaJugador.length;
 
     if (secuenciaJugador[longitudJugador - 1] !== secuencia[longitudJugador - 1]) {
-        mostrarResultado(false);
         agregarPuntaje(nombreUsuario, puntaje, ronda);
+        mostrarResultado(false);
         jugando = false;
     } else if (longitudJugador === longitudSecuencia) {
         setTimeout(siguienteRonda, 1000);
@@ -136,11 +133,11 @@ function agregarPuntaje(nombre, puntos, rondaActual) {
         puntajes.push({ nombre, puntos, ronda: rondaActual });
     }
     localStorage.setItem('puntajes', JSON.stringify(puntajes));
-    mostrarPuntajes();
 }
 
 function mostrarPuntajes() {
     const puntajes = JSON.parse(localStorage.getItem('puntajes')) || [];
+    console.log(puntajes);
     const listaPuntajes = document.getElementById('listaPuntajes');
     if (listaPuntajes) {
         listaPuntajes.innerHTML = ''; // Limpiar lista existente
@@ -162,14 +159,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 document.addEventListener('visibilitychange', function() {
-    if (document.visibilityState === 'hidden') {
-        agregarPuntaje(nombreUsuario, puntaje, ronda);  // Aseguramos pasar la ronda correcta
+    if(window.href.pathname == "/Juego.html") {
+        if (document.visibilityState === 'hidden' || document.visibilityState === 'unloaded') {
+            agregarPuntaje(nombreUsuario, puntaje, ronda);  // Aseguramos pasar la ronda correcta
+        }
     }
 });
 
 const sonidos = {
-    rojo: new Audio('rojo.mp3.mp3'),
-    verde: new Audio('verde.mp3.mp3'),
-    azul: new Audio('azul.mp3.mp3'),
-    amarillo: new Audio('amarillo,mp3.mp3')
+    rojo: new Audio('rojo.mp3'),
+    verde: new Audio('verde.mp3'),
+    azul: new Audio('azul.mp3'),
+    amarillo: new Audio('amarillo.mp3')
 };
