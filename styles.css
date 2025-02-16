@@ -151,8 +151,9 @@ button{
 #salir{position: absolute; 
     top: 10px; 
     left: 10px; 
-    font-size: small; 
-    width: 67px;
+    font-size: 20px; 
+    width: 100px;
+    text-align: center;
 }
 
 .boton{

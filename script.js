@@ -6,6 +6,7 @@ let secuenciaJugador = [];
 let puntaje = 0;
 let nombreUsuario = localStorage.getItem('nombreUsuario');
 let jugando = false;
+let ronda = 0;  // Añadimos una variable global para la ronda
 
 /**
  * Función que se ejecuta al cargar la página
@@ -17,6 +18,7 @@ function guardarNombre() {
         return;
     }
     localStorage.setItem('nombreUsuario', usuario);
+    reiniciarPuntajes();  // Reiniciamos los puntajes cuando se registra un nuevo usuario
     window.location.href = 'Menu_registrado.html';
 }
 
@@ -32,14 +34,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
         document.getElementById('mensajeSaludo').innerText = mensajeSaludo;
     }
 
-    mostrarPuntajeActual();
+    mostrarPuntajes();
 });
 
 function iniciarJuego() {
     secuencia = [];
     secuenciaJugador = [];
     puntaje = 0;
+    ronda = 0;  // Reiniciamos la ronda al iniciar el juego
     document.getElementById('puntaje').innerText = `Puntaje: ${puntaje}`;
+    document.getElementById('ronda').innerText = `Ronda: ${ronda}`;
     document.getElementById('resultado').style.display = 'none';
     siguienteRonda();
 }
@@ -47,7 +51,9 @@ function iniciarJuego() {
 function siguienteRonda() {
     secuenciaJugador = [];
     puntaje++;
+    ronda++;
     document.getElementById('puntaje').innerText = `Puntaje: ${puntaje}`;
+    document.getElementById('ronda').innerText = `Ronda: ${ronda}`;
     const nuevoColor = generarColorAleatorio();
     secuencia.push(nuevoColor);
     reproducirSecuencia();
@@ -93,7 +99,7 @@ function verificarSecuencia() {
 
     if (secuenciaJugador[longitudJugador - 1] !== secuencia[longitudJugador - 1]) {
         mostrarResultado(false);
-        agregarPuntaje(nombreUsuario, puntaje, secuencia.length);
+        agregarPuntaje(nombreUsuario, puntaje, ronda);
         jugando = false;
     } else if (longitudJugador === longitudSecuencia) {
         setTimeout(siguienteRonda, 1000);
@@ -115,27 +121,25 @@ function reiniciarJuego() {
     iniciarJuego();
 }
 
-function agregarPuntaje(nombre, puntos, ronda) {
+function agregarPuntaje(nombre, puntos, rondaActual) {
     const puntajes = JSON.parse(localStorage.getItem('puntajes')) || [];
     const indiceExistente = puntajes.findIndex(p => p.nombre === nombre);
     if (indiceExistente !== -1) {
         puntajes[indiceExistente].puntos = puntos;
-        puntajes[indiceExistente].ronda = ronda;
+        puntajes[indiceExistente].ronda = rondaActual;
     } else {
-        puntajes.push({ nombre, puntos, ronda });
+        puntajes.push({ nombre, puntos, ronda: rondaActual });
     }
     localStorage.setItem('puntajes', JSON.stringify(puntajes));
-    mostrarPuntajeActual();
+    mostrarPuntajes();
 }
 
-function mostrarPuntajeActual() {
-    const usuario = localStorage.getItem('nombreUsuario');
+function mostrarPuntajes() {
     const puntajes = JSON.parse(localStorage.getItem('puntajes')) || [];
     const listaPuntajes = document.getElementById('listaPuntajes');
     if (listaPuntajes) {
         listaPuntajes.innerHTML = ''; // Limpiar lista existente
-        const puntajeUsuario = puntajes.filter(p => p.nombre === usuario);
-        puntajeUsuario.forEach((puntaje, index) => {
+        puntajes.forEach((puntaje, index) => {
             const li = document.createElement('li');
             li.innerText = `${index + 1}. ${puntaje.nombre} - ${puntaje.puntos} puntos - Ronda ${puntaje.ronda}`;
             listaPuntajes.appendChild(li);
@@ -143,8 +147,17 @@ function mostrarPuntajeActual() {
     }
 }
 
+// Nueva función para reiniciar puntajes
+function reiniciarPuntajes() {
+    localStorage.removeItem('puntajes');
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    mostrarPuntajes();
+});
+
 document.addEventListener('visibilitychange', function() {
     if (document.visibilityState === 'hidden') {
-        agregarPuntaje(nombreUsuario, puntaje, secuencia.length);
+        agregarPuntaje(nombreUsuario, puntaje, ronda);  // Aseguramos pasar la ronda correcta
     }
 });
