@@ -208,3 +208,4 @@ const sonidos = {
     azul: new Audio('azul.mp3'),
     amarillo: new Audio('amarillo.mp3')
 };
+
